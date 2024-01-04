@@ -1,0 +1,70 @@
+{% include "header.html" %}
+
+<!--Row 2 - Column 1-->
+<div class="col-2">
+</div>
+
+<!--Row 2 - Column 2-->
+<div class="col-8 border border-dark rounded">
+
+    <h2 align="center">Edit Song Details</h2>
+    <form method="POST" action="/edit_song/{{ song.song_id }}" enctype="multipart/form-data">
+        <div class="col">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{ song.title }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="genre" class="form-label">Genre:</label>
+                <select class="form-select" id="genre" name="genre">
+                    <option value="Indie" {% if song.genre == 'Indie' %} selected {% endif %}>Indie</option>
+                    <option value="Country" {% if song.genre == 'Country' %} selected {% endif %}>Country</option>
+                    <option value="Rock" {% if song.genre == 'Rock' %} selected {% endif %}>Rock</option>
+                    <option value="Pop" {% if song.genre == 'Pop' %} selected {% endif %}>Pop</option>
+                    <option value="Hip Hop" {% if song.genre == 'Hip Hop' %} selected {% endif %}>Hip Hop</option>
+                    <option value="Indian Pop" {% if song.genre == 'Indian Pop' %} selected {% endif %}>Indian Pop</option>
+                    <option value="Electronic" {% if song.genre == 'Electronic' %} selected {% endif %}>Electronic</option>
+                    <option value="Classical" {% if song.genre == 'Classical' %} selected {% endif %}>Classical</option>
+                    <option value="Bollywood" {% if song.genre == 'Bollywood' %} selected {% endif %}>Bollywood</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="singer" class="form-label">Singer</label>
+                <input type="text" class="form-control" id="singer" name="singer" value="{{ song.singer }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="singer" class="form-label">Release Date(year)</label>
+                <input type="text" class="form-control" id="release_date" name="release_date" value="{{ song.release_date }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="lyrics" class="form-label">Lyrics</label>
+                <textarea class="form-control" id="lyrics" name="lyrics" rows="4" required>{{ song.lyrics }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="cover" class="form-label">Cover Image:</label>
+                <input type="file" class="form-control" id="cover" name="cover">
+                <img src="/{{ song.cover }}" alt="Current Cover" width="100" height="100">
+            </div>
+            <div class="mb-3">
+                <label for="music_file" class="form-label">Music File:</label>
+                <input type="hidden" id="default_music_file" name="default_music_file" value="{{ song.file_path }}">
+                <input type="file" class="form-control" id="music_file" name="music_file">
+                <audio controls>
+                    <source src="{{ song.file_path }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <div class="my-2" align="center">
+                <button type="submit" class="btn btn-dark">Save Changes</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!--Row 2 - Column 3-->
+<div class="col-2">
+</div>
+
+{% include "footer.html" %}

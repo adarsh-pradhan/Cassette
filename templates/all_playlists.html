@@ -1,0 +1,77 @@
+{% include "header.html" %}
+
+<!--        Row 2 - Column 1-->
+<div class="col-3">
+
+<!--            Now Playing-->
+    {% include "now_playing.html" %}
+</div>
+
+<!--        Row 2 - Column 2 -->
+<div class="col-6">
+
+    <div class="row border border-dark rounded">
+
+        <div class="row ms-1 border-bottom border-dark">
+            <h3>All Complete Playlists list
+                {% if current_user.role != 0 %}
+                    (Public only)
+                {% endif %}
+            :</h3>
+
+        </div>
+
+        <div class="row" align="center">
+
+            {% for playlist in playlists %}
+                <div class="card mx-auto ms-2 my-1 song_list" style="max-width:50rem; max-height:4rem;" align="center">
+                    <div class="row g-0">
+                        <div class="col" align="center">
+                            <form method="POST" action="user_dashboard">
+                                <input type="hidden" name="song_id" value="{{ playlist.song_id }}">
+                                <button class="fa-solid fa-circle-play" type="submit" name="stream"></button>
+                            </form>
+                        </div>
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body" align="left">
+                                <a href="/view_song/{{ playlist.playist_id }}">
+                                    <h5 class="card-title mb-0">{{ playlist.title }}</h5>
+                                </a>
+                                <a href="/view_creator/{{ user.user_id }}">
+                                    <p class="card-text mt-0 mb-0"><small class="text-body-secondary">{{ playlist.user.name }}</small></p>
+                                </a>
+                            </div>
+                        </div>
+                        {% if current_user.role == 0 %}
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-1 mx-4" align="center">
+                                        <a class="btn mx-auto btn-light border" style="width:5rem; height:2rem;" href="/delete_playlist/{{ playlist.playlist_id }}" role="button">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <div class="row">
+
+<!--                Functionality for audio controls-->
+        {% include "audio_controls.html" %}
+
+    </div>
+</div>
+
+<!--              Column 3-->
+<div class="col-2 ms-4">
+
+</div>
+
+{% include "footer.html" %}

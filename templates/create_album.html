@@ -1,0 +1,100 @@
+{% include "header.html" %}
+
+<!--Row 2 - Column 1-->
+<div class="col ">
+    <div class="row mx-5 border-bottom border-dark">
+        <div class="col-3" align="right">
+            <a class="dropdown-toggle"  style="font-size:2rem;" href="#" id="creator_dashboard" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+                    Creator Dashboard
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="creator_dashboard">
+                <li><a class="dropdown-item" href="/creator_dashboard"><i class="fa-solid fa-guitar"></i> Creator Dashboard</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/creator/songs"><i class="fa-solid fa-music"></i> My Songs</a></li>
+                <li><a class="dropdown-item" href="/creator/albums"><i class="fa-solid fa-compact-disc"></i> My Albums</a></li>
+                <li><a class="dropdown-item" href="/creator/playlist"><i class="fa-solid fa-list-ul"></i> My Playlists</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a></li>
+            </ul>
+
+        </div>
+        <div class="col-1 my-2">
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4" align="right">
+            <a class="dropdown-toggle"  style="font-size:2rem;" href="#" id="create" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-circle-plus"></i>
+                 Create!
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="create">
+                <li><a class="dropdown-item" href="/upload_song_form"><i class="fa-solid fa-microphone-lines"></i> Upload a new song</a></li>
+                <li><a class="dropdown-item" href="/creato_album"><i class="fa-solid fa-compact-disc"></i> Create a new album</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-5 mt-2 border border-dark rounded">
+            <div class="row">
+                <h2 class="text-center mt-2 mb-4">Create a new album</h2>
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Title:</label>
+                                <input type="text" class="form-control" id="title" name="title">
+                            </div>
+                        </div>
+
+        <!--                                        Select option for Genre-->
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="genre" class="form-label">Genre:</label>
+                                <select class="form-select" id="genre" name="genre">
+                                    <option value="Indie">Indie</option>
+                                    <option value="Country">Country</option>
+                                    <option value="Rock">Rock</option>
+                                    <option value="Pop">Pop</option>
+                                    <option value="Hip Hop">Hip Hop</option>
+                                    <option value="Indian Pop">Indian Pop</option>
+                                    <option value="Electronic">Electronic</option>
+                                    <option value="Classical">Classical</option>
+                                    <option value="Bollywood">Bollywood</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description:</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cover_file" class="form-label">Album Cover:</label>
+                        <input type="file" class="form-control" id="cover_file" name="cover_file">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4" align="right">
+                            <label for="release_date" class="form-label">Release Date(year):</label>
+                        </div>
+                        <div class="col-md-3" align="left">
+                            <input type="number" class="form-control" id="release_date" name="release_date">
+                        </div>
+                        <div class="col-md-5" align="center">
+                            <button type="submit" class="btn btn-dark">
+                                <i class="fa-solid fa-upload"></i>
+                                Upload
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col">
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}

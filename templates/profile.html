@@ -1,0 +1,53 @@
+{% include "header.html" %}
+
+<!--        Column 1-->
+<div class="col-3 ">
+</div>
+
+<!--        Column 2 -->
+<div class="col-6 border border-dark rounded">
+    <div class="row">
+
+        <div class="col" align="center">
+            {% if current_user.user_id == selected_user.user_id %}
+                <a class="dropdown-item" href="/profile_picture">
+                    {% if selected_user.profile_pic == None %}
+                        {% if selected_user.role == 2 %}
+                            <img src="/static/img/creator_icon.png" width="300px" height="300px">
+                        {% else %}
+                            <img src="/static/img/standard_user_icon.png" width="300px" height="300px">
+                        {% endif %}
+                    {% else %}
+                        <img src="{{ selected_user.profile_pic }}" width="300px" height="300px">
+                    {% endif %}
+                </a>
+            {% else %}
+                {% if selected_user.profile_pic == None %}
+                    {% if selected_user.role == 2 %}
+                        <img src="/static/img/creator_icon.png" width="300px" height="300px">
+                    {% else %}
+                        <img src="/static/img/standard_user_icon.png" width="300px" height="300px">
+                    {% endif %}
+                {% else %}
+                    <img src="{{ selected_user.profile_pic }}" width="300px" height="300px">
+                {% endif %}
+            {% endif %}
+        </div>
+
+    </div>
+        <div class="row my-2">
+            <div class="col" align="center">
+                <h3>{{ selected_user.name }}</h3>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+</div>
+
+<!--              Column 3-->
+<div class="col-3">
+
+</div>
+
+{% include "footer.html" %}

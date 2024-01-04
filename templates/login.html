@@ -1,0 +1,49 @@
+{% include "header.html" %}
+
+<div class="col">
+</div>
+
+<div class="col-8">
+    <div class="row">
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-4 border border-secondary rounded">
+                    <h2 class="text-center mt-3">Login</h2>
+                    <form method="POST">
+                        <div class="form-floating mb-3 mt-3">
+                            <input type="email" class="form-control" id="Email" name="email" placeholder="name@example.com">
+                            <label for="Email">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="Password" name="password" placeholder="Password">
+                            <label for="Password">Password</label>
+                        </div>
+                        <div class="row">
+                            <div class="row mx-1" align="center">
+                                <div class="col" align="center">
+                                    <button type="submit" class="btn btn-dark mb-2" style="width:30%;">Login</button>
+                                </div>
+                            </div>
+                            <div class="row mx-1" align="center">
+                                <div class="col mx-1 border-top" align="center">
+                                    <a class="btn btn-light mb-3 border" href="/user_registration" role="button">Create an account</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="position-fixed fixed-bottom w-100" align="center">
+            <img src="\static\img\cassette.png" alt="Controls" usemap="#controls" width="330" height="207">
+        </div>
+    </div>
+</div>
+
+<div class="col">
+</div>
+
+{% include "footer.html" %}

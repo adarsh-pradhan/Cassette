@@ -1,0 +1,5 @@
+instance/cassette.sqlite3
+static/audio
+static/covers
+venv
+debug.log

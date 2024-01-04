@@ -1,0 +1,43 @@
+{% include "header.html" %}
+
+<!--        Column 1-->
+<div class="col-3 ">
+</div>
+
+<!--        Column 2 -->
+<div class="col-6 border border-dark rounded">
+    <div class="row">
+
+        <div class="col my-2" align="center">
+            <form method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <h3> Upload a new profile picture?</h3>
+                </div>
+                <div class="row">
+                    <div class="mb-3">
+                        <label for="profile_image" class="form-label">Select Profile Picture:</label>
+                        <input type="file" class="form-control" id="profile_image" name="profile_image">
+                    </div>
+                </div>
+                <div class="row" style="width:5rem;">
+                    <button type="submit"> Upload!</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+        <div class="row my-2">
+
+        </div>
+        <div class="row">
+
+        </div>
+</div>
+
+<!--              Column 3-->
+<div class="col-3">
+
+</div>
+
+{% include "footer.html" %}

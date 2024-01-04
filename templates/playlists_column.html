@@ -1,0 +1,36 @@
+<div class="col ms-2 me-4 border rounded">
+    <div class="row">
+    <!-- <div class="row border border-dark rounded" style="height:200%; width:145%; z-index:-1;"> -->
+
+        <div class="row mx-1 my-1 border-bottom" align="right">
+            <div class="col" align="right">
+                <a href="/my_playlists">
+                    <h3 align="right">Playlists</h3>
+                </a>
+            </div>
+            <div class="col">
+                <a href="/create_playlist" class="btn btn-light border" style="width:6rem"><i class="fa-solid fa-square-plus"></i> Create</a>
+            </div>
+        </div>
+
+        <div class="row" align="left" >
+
+            {% for playlist in playlists %}
+                <div class="row mx-2 my-1 border-bottom border-start rounded border-dark">
+                    <div class="row">
+                        <div class="col">
+                            <a href="/playlist/{{ playlist.playlist_id }}">
+                                <h6 class="mt-1">{{ playlist.title }}</h6>
+                            </a>
+                            <p class="card-text"><small class="text-body-secondary">{{ playlist.user.name }}</small></p>
+                        </div>
+                        <div class="col" align="right">
+                            <a href="/delete_playlist/{{ playlist.playlist_id }}" class="btn btn-light border-start" style="width:5rem;">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>

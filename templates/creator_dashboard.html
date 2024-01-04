@@ -1,0 +1,77 @@
+{% include "header.html" %}
+
+<div class="col">
+
+    {% include "creator_dashboard_dropdown_bar.html" %}
+
+    <div class="row mx-5 mt-2 pb-2">
+<!--        Account Insights Section-->
+        <div class="col-7 ">
+            <div class="row-1 pt-3 ">
+                <div class="col border-bottom border-dark">
+                    <h3>Account Insights</h3>
+                </div>
+            </div>
+
+            <div class="row mx-3 ">
+                <div class="col-2 my-3 p-3 ms-4 me-2 border rounded border-dark" align="center">
+                    My Uploaded Songs Count<br><b>{{ my_songs_count}}</b>
+                </div>
+                <div class="col-2 mx-4 my-3 p-3 ms-4 me-1 border rounded border-dark" align="center">
+                    Songs Average Rating<br><b>{{ my_songs_average_rating }}</b>
+                </div>
+                <div class="col-2 mx-4 my-3 p-3 me-4 ms-4 border rounded border-dark" align="center">
+                    My Total Albums<br><b>{{ my_albums_count }}</b>
+                </div>
+                <div class="col-2 mx-4 my-3 p-3 me-4 ms-4 border rounded border-dark" align="center">
+                    My Total Playlists<br><b>{{ my_playlists_count }}</b>
+                </div>
+            </div>
+
+            <div class="row  my-2 pb-3">
+                <div class="row border-bottom border-dark">
+                    <h3>Audience Reach Insights</h3>
+                </div>
+                <div class="row mx-5">
+                    <div class="col-6">
+                        <div class="container mt-3">
+                            <h4 class="mb-4 pb-1 border-bottom border-dark">Song Play Counts :</h4>
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Song ID</th>
+                                        <th scope="col">Total Play Count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for song_id, count in song_play_counts.items() %}
+                                        <tr>
+                                            <td>{{ song_id }}</td>
+                                            <td>{{ count }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="row mt-3 my-2 border-start border-dark">
+                <div class="col">
+                    <div class="row">
+                        <h3>Song VS Plays Graph</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <img src="{{ song_vs_plays_graph_filename }}" alt="Song VS Plays Graph">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% include "footer.html" %}

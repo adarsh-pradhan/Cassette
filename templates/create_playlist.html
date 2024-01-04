@@ -1,0 +1,45 @@
+{% include "header.html" %}
+
+<!--Row 2 - Column 1-->
+<div class="col ">
+</div>
+<!--Row 2 - Column 2-->
+<div class="col-5 border border-dark rounded">
+    <div class="row">
+        <h2 class="text-center mt-3 mb-4">Create a new playlist</h2>
+        <form method="POST">
+            <div class="row">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="PlaylistTitle" name="title" placeholder="Playlist Title" required>
+                        <label class="mx-2" for="PlaylistTitle">Playlist title</label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating mb-2">
+                            <select class="form-select" id="access" name="access">
+                                <option value="Private">Private</option>
+                                <option value="Public">Public</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="Description" name="description" placeholder="Playlist description">
+                    <label class="mx-3" for="Description">Write a description for your playlist?</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-dark my-3 mx-auto" style="width:200px">Create Playlist!</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--Row 2 - Column 3-->
+<div class="col">
+</div>
+
+{% include "footer.html" %}

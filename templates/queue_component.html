@@ -1,0 +1,42 @@
+<!--            Queue  -->
+<div class="row-auto mx-3 mb-1 border-top" align="center">
+    <h4 class="ms-2" align="left">Explore All:</h4>
+    <a href="/all_songs"><i class="fa-solid fa-music mb-2 ms-1"></i>Songs</a>
+    <a href="/all_albums"><i class="fa-solid fa-compact-disc mb-2 ms-1"></i>Albums</a><br>
+    <a href="/all_playlists"><i class="fa-solid fa-list-ul mb-2"></i>Playlists</a>
+    <a href="#"><i class="fa-solid fa-guitar"></i>Artists</a>
+</div>
+<div class="row-auto mx-3 mb-2 border rounded" style="height:140%; z-index:-1;">
+    <div class="col ">
+        <div class="row mb-1">
+            <h3 align="center">Queue</h3>
+
+            {% if not queue %}
+                <div align="center">
+                    (Tip: Add songs to queue)
+                </div>
+            {% endif %}
+
+        </div>
+        <div class="col">
+            <div class="row" align="center" style="overflow-y:scroll; height:40%; z-index:-1;">
+
+                {% for song in queue %}
+                    <div class="card ms-4 my-1 border border-rounded border-dark" style="max-width:19rem; max-height:3rem;">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <img src="/static/img/album_art.png" class="img-fluid rounded-start my-2" alt="..." style="max-height: 2rem; max-width: 2rem;" align="center">
+                                </div>
+                                <div class="col-sm-8 ms-2">
+                                    <div class="card-body">
+                                        <h6 class="card-title">{{ song.song_name }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>

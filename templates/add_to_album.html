@@ -1,0 +1,53 @@
+{% include "header.html" %}
+
+<!--        Row 2 - Column 1-->
+<div class="col-3">
+</div>
+
+<!--Row 2 - Column 2 -->
+<div class="col-6 border border-dark rounded">
+    <div class="row mx-1 border-bottom border-dark" align="center">
+        <div class="row">
+            <h3>Add songs into your "<a href="/album/{{album.album_id}}">{{ album.title }}</a>" album</h3>
+        </div>
+        <div class="row ">
+            <h5>Or,<a class="dropdown-item" href="/upload_song_form"><i class="fa-solid fa-microphone-lines"></i> Upload a new song</a></h5>
+        </div>
+    </div>
+
+    {% for song in songs %}
+        <div class="row my-1 border-bottom">
+            <div class="col-9">
+                <div class="row mx-2">
+                    <div class="col-3">
+                        <img src="/{{ song.cover }}" class="img-fluid rounded-start mx-2 my-3" alt="..." style="max-height:4rem; max-width:4rem;" align="center">
+                    </div>
+                    <div class="col my-4">
+                        <a href="/view_song/{{ song.song_id }}">
+                            <h3 align="left">{{ song.title }}</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 my-4" align="right">
+                <a href="/add_to_album_song/{{ album.album_id }}/{{ song.song_id }}" class="btn btn-light border" style="width:8rem">
+                    <i class="fa-solid fa-circle-plus"></i> Add song
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% if not songs %}
+        <h6 class="my-2" align="center">No songs are available to add into your album :(</h6>
+        <div class="my-2" align="center">
+            <a href="/upload_song_form"><i class="fa-solid fa-microphone-lines"></i> Upload a new song?</a>
+        </div>
+    {% endif %}
+
+</div>
+
+<!--Column 3-->
+<div class="col">
+</div>
+
+{% include "footer.html" %}

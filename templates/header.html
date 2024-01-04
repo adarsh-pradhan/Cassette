@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" {% if current_user.dark_mode == True %}
+                    data-bs-theme="dark">
+                {% else %}
+                    >
+                {% endif %}
+<head>
+    <title>{{ endpoint_title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <script src="/static/js/search.js"></script>
+    <script src="/static/js/control_audio.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<!--        Main Container -->
+<div class="container-fluid">
+
+<!--    Row 1 -->
+    <div class="row">
+
+<!--        Row 1 - Column 1 -->
+        <div class="col-1">
+
+            <div class="dropdown">
+
+<!--                Previous code for profile picture-->
+<!--                <div class="profile-pic">-->
+<!--                    <img src="/static/img/tag_standard_user.png" usemap="#user" width="100" height="30" alt="Profile Picture">-->
+<!--                    <img src="/static/img/standard_user_icon.png" usemap="#user" width="100" height="100" alt="Profile Picture">-->
+<!--                </div>-->
+
+<!--                Logic for hiding this component, when logged-out-->
+                {% if user %}
+
+    <!--                Logic in Jinja2, for selecting the correct pictures-->
+                    {% if current_user.role == 0 %}
+                        <div>
+                            <a href="/admin_dashboard">
+                                <img src="/static/img/tag_admin.png" usemap="#user" width="100" height="30" alt="Profile Picture">
+                            </a>
+                            <img src="/static/img/admin_icon.png" usemap="#user" width="100" height="100" alt="Profile Picture">
+                        </div>
+                        <a class="dropdown-toggle text-decoration-none text-dark" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div style="margin-top: -20px;" align="center">
+                                <b>{{ user.name }}</b>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                            <li><a class="dropdown-item" href="/admin_dashboard"><i class="fa-solid fa-house"></i> Admin Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/admin_dashboard/all_users"><i class="fas fa-cog fa-fw"></i> All Users</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/all_songs"><i class="fa-solid fa-music"></i> All Songs</a></li>
+                            <li><a class="dropdown-item" href="/all_albums"><i class="fa-solid fa-compact-disc"></i> All Albums</a></li>
+                            <li><a class="dropdown-item" href="/all_playlists"><i class="fa-solid fa-list-ul"></i> All Playlists</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a></li>
+                        </ul>
+
+                    {% elif current_user_level == 1 %}
+                        <div class="profile-pic">
+                            <a href="/user_dashboard">
+                                <img src="/static/img/tag_standard_user.png" usemap="#user" width="100" height="30" alt="Profile Picture">
+                            </a>
+                            <img src="/static/img/standard_user_icon.png" usemap="#user" width="100" height="100" alt="Profile Picture">
+                        </div>
+                        <a class="dropdown-toggle text-decoration-none text-dark" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div style="margin-top: -20px;" align="center">
+                                <b>{{ user.name }}</b>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                            <li><a class="dropdown-item" href="/profile/{{ current_user.user_id }}"><i class="fas fa-sliders-h fa-fw"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="/settings"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
+                            <li><a class="dropdown-item" href="/creator_dashboard"><i class="fas fa-solid fa-guitar fa-fw"></i> Creator Account</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a></li>
+                        </ul>
+
+                    {% else %}
+                        <div class="profile-pic">
+                            <a href="/creator_dashboard">
+                                <img src="/static/img/tag_creator.png" usemap="#user" width="100" height="30" alt="Profile Picture">
+                            </a>
+                            <img src="/static/img/creator_icon.png" usemap="#user" width="100" height="100" alt="Profile Picture">
+                        </div>
+                        <a class="dropdown-toggle text-decoration-none text-dark" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div style="margin-top: -20px;" align="center">
+                                <b>{{ user.name }}</b>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                            <li><a class="dropdown-item" href="/profile/{{ current_user.user_id }}"><i class="fas fa-sliders-h fa-fw"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="/settings"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
+                            <li><a class="dropdown-item" href="/user_dashboard"><i class="fa-solid fa-user"></i> User Account</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a></li>
+                        </ul>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+<!--        Row 1 - Column 2 -->
+        <div class="col-10" align="center">
+            <div class="row " align="center">
+                <h1><b><a href="/" class="text-reset text-decoration-none">Cassette</a></b></h1>
+                <p>This is Cassette. A retro-themed music streaming service.</p>
+            </div>
+        </div>
+
+        <!--        Row 1 - Column 3 -->
+        <div class="col-1" align="right">
+            <div class="col">
+                <div class="row">
+                    {% if endpoint_title == "login" %}
+                        <a class="btn btn-light mb-3 border" href="/admin_login" style="width:8rem;">Admin Login</a>
+                    {% elif endpoint_title == "admin_login" %}
+                        <a class="btn btn-light mb-3 border" href="/login" style="width:8rem;">User Login</a>
+                    {% else %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col mx-2 my-2">
+                {% if current_user.dark_mode == True %}
+                    <a href="/toggle_dark_mode"><i class="fa-solid fa-moon"></i></a>
+                {% else %}
+                    <a href="/toggle_dark_mode"><i class="fa-solid fa-sun"></i></a>
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
+
+<!--    Row 2 -->
+    <div class="row ">

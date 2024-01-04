@@ -1,0 +1,120 @@
+{% if filtered_songs_bool %}
+    <div>
+        <h5>Search Results for "{{ search_query }}" :</h5>
+    <div class="row" style="overflow-y:scroll;">
+<!--                Search results-->
+    {% for song in filtered_songs %}
+
+        <div class="card mx-auto my-1 song_list" style="max-width:50rem; max-height:4rem;">
+            <div class="row g-0">
+                <div class="col" align="center">
+                    <form method="POST" action="user_dashboard">
+                        <input type="hidden" name="song_id" value="{{ song.song_id }}">
+                        <button class="fa-solid fa-circle-play my-4" type="submit" name="stream"></button>
+                    </form>
+                </div>
+                <div class="col-md-1">
+                    <a href="/view_song/{{ song.song_id }}">
+<!--                                place the line of code below to an if-else block-->
+<!--                                <img src="/static/img/album_art.png" class="img-fluid rounded-start my-2" alt="..." style="max-height:3rem; max-width:3rem;" align="center">-->
+                        <img src="{{ song.cover }}" class="img-fluid rounded-start my-2" alt="..." style="max-height:3rem; max-width:3rem;" align="center">
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body" align="left">
+                        <a href="/view_song/{{ song.song_id }}">
+                            <h5 class="card-title mb-0">{{ song.title }}</h5>
+                        </a>
+                        <a href="/view_creator/{{ song.user_id }}">
+                            <p class="card-text mt-0 mb-0"><small class="text-body-secondary">{{ song.singer }}</small></p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-4" align="right">
+                    <form method="POST" action="{{ url_for('add_to_queue', song_id=song.user_id) }}">
+                        <div class="row my-2 mx-2">
+                            <div class="col me-1">
+                                <div class="row" style="width:6rem;">
+                                    <a href="/add_to_queue/{{ song.song_id }}" class="btn btn-light border"><i class="fa-solid fa-circle-plus"></i> Queue</a>
+                                </div>
+                            </div>
+                            <div class="col me-1">
+                                <div class="row" style="width:6rem;">
+                                    <a href="/add_to_playlist/{{ song.song_id }}" class="btn btn-light border"><i class="fa-solid fa-circle-plus"></i> Playlist</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    </div>
+
+{% elif songs %}
+    <div class="border-bottom">
+        {% if search_query_bool %}
+            No search match found for "{{ search_query }}" :(
+        {% else %}
+            To search, start typing above.
+        {% endif %}
+    </div>
+    <div>
+        <h5 class="mx-2 mt-1 mb-2" align="left">Recommended Songs:</h5>
+    <div class="row" style="overflow-y:scroll;">
+        <!-- List of all songs, without search -->
+        {% for song in songs %}
+            <div class="card mx-auto my-1 song_list" style="max-width:50rem; max-height:4rem;">
+                <div class="row g-0">
+                    <div class="col-1" align="center">
+                        <div class="row-1">
+                            <form method="POST" action="user_dashboard">
+                                <input type="hidden" name="song_id" value="{{ song.song_id }}">
+                                <button class="fa-solid fa-circle-play mt-3" type="submit" name="stream"></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <a href="/view_song/{{ song.song_id }}">
+    <!--                                place the line of code below to an if-else block-->
+    <!--                                <img src="/static/img/album_art.png" class="img-fluid rounded-start my-2" alt="..." style="max-height:3rem; max-width:3rem;" align="center">-->
+                            <img src="{{ song.cover }}" class="img-fluid rounded-start my-2" alt="..." style="max-height:3rem; max-width:3rem;" align="center">
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body" align="left">
+                            <a href="/view_song/{{ song.song_id }}">
+                                <h5 class="card-title mb-0">{{ song.title }}</h5>
+                            </a>
+                            <a href="/view_creator/{{ song.user_id }}">
+                                <p class="card-text mt-0 mb-0"><small class="text-body-secondary">{{ song.singer }}</small></p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" align="right">
+                        <form method="POST" action="{{ url_for('add_to_queue', song_id=song.user_id) }}">
+                            <div class="row my-2 mx-2">
+                                <div class="col me-1">
+                                    <div class="row" style="width:6rem;">
+                                        <a href="/add_to_queue/{{ song.song_id }}" class="btn btn-light border"><i class="fa-solid fa-circle-plus"></i> Queue</a>
+                                    </div>
+                                </div>
+                                <div class="col me-1">
+                                    <div class="row" style="width:6rem;">
+                                        <a href="/add_to_playlist/{{ song.song_id }}" class="btn btn-light border"><i class="fa-solid fa-circle-plus"></i> Playlist</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+            </div>
+    </div>
+
+{% else %}
+{% endif %}

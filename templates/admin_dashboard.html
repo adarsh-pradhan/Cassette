@@ -1,0 +1,114 @@
+{% include "header.html" %}
+
+<div class="container-fluid">
+    <div class="row mx-5 border-bottom border-dark">
+        <div class="col-3" align="center">
+            <h2>Admin Dashboard</h2>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3" align="center">
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-3 me-4">
+            <div class="row">
+                <div class="col mx-5 border border-dark">
+                    <div class="row-4 mx-4 my-3" align="center">
+                        <img src="/static/img/standard_user_icon.png" usemap="#user" width="100" height="100" alt="Profile Picture">
+                        <h4>Standard Users<br>
+                        <b class="mx-2 mt-2 border rounded border-dark">{{ standard_users_count }}</b></h4>
+                    </div>
+                    <div class="row-4 mx-4 mt-3" align="center">
+                        <img src="/static/img/creator_icon.png" usemap="#user" width="100" height="100" alt="Profile Picture">
+                        <h4>Creators<br>
+                        <b class="mx-2 my-2 border rounded border-dark">{{ creators_count }}</b></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-4">
+
+            </div>
+        </div>
+        <div class="col me-5">
+            <div class="row border-bottom border-dark">
+                <h3>App Performance</h3>
+            </div>
+            <div class="row">
+                <div class="col mx- my-3 p-3 ms-4 me-2 border" align="center">
+                    Tracks<br>{{ songs_count }}
+                </div>
+                <div class="col mx-4 my-3 p-3 ms-4 me-1 border" align="center">
+                    Total Albums<br>{{ albums_count }}
+                </div>
+                <div class="col mx-4 my-3 p-3 me-4 ms-4 border" align="center">
+                    Genre<br>{{ genres_count }}
+                </div>
+            </div>
+            <div class="row border-top border-dark">
+                <div class="col mt-3 my-2">
+                    <div class="row">
+                        <h3>Monthly Usage Graph</h3>
+                    </div>
+                    <div class="row">
+                        <img src="{{ monthly_usage_graph_filename }}" alt="Song VS Plays Graph">
+                    </div>
+                </div>
+                <div class="col mt-3 my-2 border-start border-dark">
+                    <div class="row">
+                        <h3>Song VS Plays Graph</h3>
+                    </div>
+                    <div class="row">
+                        <img src="{{ song_vs_play_graph_filename }}" alt="Song VS Plays Graph">
+                    </div>
+                </div>
+            </div>
+            <div class="row border-top border-dark mt-2">
+                <div class="col">
+                    <div class="container mt-3">
+                        <h3 class="mb-4">Song Play Counts</h3>
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Song ID</th>
+                                    <th scope="col">Total Play Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for song_id, count in song_counts.items() %}
+                                    <tr>
+                                        <td>{{ song_id }}</td>
+                                        <td>{{ count }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="container mt-4">
+                        <h3 class="mb-4">User Play Counts</h3>
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">User ID</th>
+                                    <th scope="col">Total Play Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user_id, count in user_counts.items() %}
+                                    <tr>
+                                        <td>{{ user_id }}</td>
+                                        <td>{{ count }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}

@@ -1,0 +1,200 @@
+{% include "header.html" %}
+
+<!--        Row 2 - Column 1-->
+<div class="col-3">
+
+<!--            Now Playing-->
+    {% if song_to_stream %}
+        <div class="row-2 position-fixed fixed-bottom mx-4 my-4" align="left">
+            <div class="card border border-dark rounded" style="width: 13rem;">
+                <h5 align="center">Now Playing</h5>
+
+                {% if song_to_stream.cover %}
+                    <img src="{{ song_to_stream.cover }}" style="max-width:200px; max-height:200px;" class="card-img-top mx-1" alt="..." align="center">
+                {% else %}
+                    <img src="/static/img/album_art.png" style="max-width:200px; max-height:200px;" class="card-img-top mx-1" alt="..." align="center">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title" align="center">{{ song_to_stream.title }}</h5>
+                    <p class="card-text" align="center">{{ song_to_stream.singer }}</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<!--        Row 2 - Column 2 -->
+<div class="col-6">
+
+    {% if filtered_songs_bool %}
+        <a href="/all_songs"><h4><i class="fa-solid fa-circle-left"></i> Back to all songs</h4></a>
+    {% endif %}
+
+    <div class="row border border-dark rounded">
+
+        <div class="row" align="center">
+
+            <!-- Search Section -->
+            <form method="GET" action="/all_songs">
+                <div class="mt-2">
+                    <input type="text" name="search_query" placeholder="Search..." class="border rounded border-dark" style="width:20rem; height:2rem;">
+                    <button class="btn btn-dark" type="submit" value="Search" name="search_songs"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                </div>
+            </form>
+
+            {% if filtered_songs_bool %}
+                <div>
+                    <h5>Search Results for "{{ search_query }}" :</h5>
+
+<!--                Search results-->
+                {% for song in filtered_songs %}
+
+                    <div class="card mx-auto my-1 song_list" style="max-width:50rem; max-height:4rem;">
+                        <div class="row g-0">
+                            <div class="col" align="center">
+                                <form method="POST" action="user_dashboard">
+                                    <input type="hidden" name="song_id" value="{{ song.song_id }}">
+                                    <button class="fa-solid fa-circle-play my-4" type="submit" name="stream"></button>
+                                </form>
+                            </div>
+                            <div class="col-md-1">
+                                <a href="/view_song/{{ song.song_id }}">
+    <!--                                place the line of code below to an if-else block-->
+    <!--                                <img src="/static/img/album_art.png" class="img-fluid rounded-start my-2" alt="..." style="max-height:3rem; max-width:3rem;" align="center">-->
+                                    <img src="{{ song.cover }}" class="img-fluid rounded-start my-2" alt="..." style="max-height:3rem; max-width:3rem;" align="center">
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body" align="left">
+                                    <a href="/view_song/{{ song.song_id }}">
+                                        <h5 class="card-title mb-0">{{ song.title }}</h5>
+                                    </a>
+                                    <a href="/view_creator/{{ song.user_id }}">
+                                        <p class="card-text mt-0 mb-0"><small class="text-body-secondary">{{ song.singer }}</small></p>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" align="right">
+                                <form method="POST" action="{{ url_for('add_to_queue', song_id=song.user_id) }}">
+                                    <div class="row my-2 mx-2">
+                                        <div class="col me-1">
+                                            <div class="row" style="width:6rem;">
+                                                <a href="/add_to_queue/{{ song.song_id }}" class="btn btn-light border"><i class="fa-solid fa-circle-plus"></i> Queue</a>
+                                            </div>
+                                        </div>
+                                        <div class="col me-1">
+                                            <div class="row" style="width:6rem;">
+                                                <a href="/add_to_playlist/{{ song.song_id }}" class="btn btn-light border"><i class="fa-solid fa-circle-plus"></i> Playlist</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+
+            {% elif songs %}
+                <div class="border-bottom">
+                    {% if search_query_bool %}
+                        No search match found for "{{ search_query }}" :(
+                    {% else %}
+                        To search, start typing above.
+                    {% endif %}
+                </div>
+                <div>
+                    <h3 class="mx-2 mt-1 mb-2" align="left">Complete song list:</h3>
+
+                <!-- List of all songs, without search -->
+                {% for song in songs %}
+                    <div class="card mx-auto my-1 song_list" style="max-width:50rem; max-height:4rem;">
+                        <div class="row g-0">
+                            <div class="col-1" align="center">
+                                <div class="row-1">
+                                    <form method="POST" action="user_dashboard">
+                                        <input type="hidden" name="song_id" value="{{ song.song_id }}">
+                                        <button class="fa-solid fa-circle-play mt-3" type="submit" name="stream"></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <a href="/view_song/{{ song.song_id }}">
+    <!--                                place the line of code below to an if-else block-->
+    <!--                                <img src="/static/img/album_art.png" class="img-fluid rounded-start my-2" alt="..." style="max-height:3rem; max-width:3rem;" align="center">-->
+                                    <img src="{{ song.cover }}" class="img-fluid rounded-start my-2" alt="..." style="max-height:3rem; max-width:3rem;" align="center">
+                                </a>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body" align="left">
+                                    <a href="/view_song/{{ song.song_id }}">
+                                        <h5 class="card-title mb-0">{{ song.title }}</h5>
+                                    </a>
+                                    <a href="/view_creator/{{ song.user_id }}">
+                                        <p class="card-text mt-0 mb-0"><small class="text-body-secondary">{{ song.singer }}</small></p>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1 mt-4" align="right">
+                                <form method="POST" action="{{ url_for('add_to_queue', song_id=song.user_id) }}">
+
+                                    <a class="dropdown-toggle text-decoration-none text-dark" href="#" id="navbarDropdownSongs" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <div style="margin-top: -20px;" align="center">
+                                            <b><i class="fa-solid fa-bars"></i></b>
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownSongs">
+                                        <li><a class="dropdown-item" href="/view_lyrics/{{ song.song_id }}"><i class="fa-solid fa-scroll"></i>Lyrics</a></li>
+                                        <li><a class="dropdown-item" href="/add_to_queue/{{ song.song_id }}"><i class="fa-solid fa-circle-plus"></i> Queue</a></li>
+                                        <li><a class="dropdown-item" href="/add_to_playlist/{{ song.song_id }}"><i class="fa-solid fa-circle-plus"></i> Playlist</a></li>
+
+                                        {% if current_user.user_id == song.user_id %}
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="/edit_song/{{ song.song_id }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a></li>
+                                            <li><a class="dropdown-item" href="/delete_song/{{ song.song_id }}"><i class="fa-solid fa-trash-can"></i>Delete</a></li>
+                                        {% endif %}
+
+                                        {% if current_user.role == 0 %}
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="/edit_song/{{ song.song_id }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a></li>
+                                        <li><a class="dropdown-item" href="/flag_song/{{ song.song_id }}">
+
+                                            {% if song.flagged %} <i class="fa-solid fa-ban"></i> Remove Flag
+                                            {% else %} <i class="fa-solid fa-circle-check"></i> Flag Song
+                                            {% endif %}
+
+                                            </a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="/delete_song/{{ song.song_id }}"><i class="fa-solid fa-trash-can"></i>Delete</a></li>
+                                        {% endif %}
+
+                                    </ul>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                    </div>
+
+            {% else %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+
+<!--                Functionality for audio controls-->
+        {% include "audio_controls.html" %}
+
+    </div>
+</div>
+
+<!--              Column 3-->
+<div class="col-2 ms-4">
+
+</div>
+
+{% include "footer.html" %}

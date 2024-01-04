@@ -1,0 +1,29 @@
+{% if song_to_stream %}
+    {% if not song_to_stream.flagged %}
+        <div class="position-fixed fixed-bottom me-4 me-4 ms-2 mb-2" align="left" style="z-index:+1; margin-left:66%;">
+            <!-- <h5 class="mx-5" align="left" style="width:8rem;">Now Playing</h5> -->
+            <div class="card" style="width: 13rem; padding-top:0.3%;">
+                {% if song_to_stream.cover %}
+                    <img src="{{ song_to_stream.cover }}" style="max-width:200px; max-height:200px;" class="card-img-top mx-1" alt="..." align="center">
+                {% else %}
+                    <img src="/static/img/album_art.png" style="max-width:200px; max-height:200px;" class="card-img-top mx-1" alt="..." align="center">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title" align="center">{{ song_to_stream.title }}</h5>
+                    <p class="card-text" align="center">{{ song_to_stream.singer }}</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% else %}
+    <div class="position-fixed fixed-bottom me-4 me-4 ms-2 mb-2" align="left" style="z-index:+1; margin-left:66%;">
+        <!-- <h5 class="mx-5" align="left" style="width:8rem;">Now Playing</h5> -->
+        <div class="card" style="width: 13rem; padding-top:0.3%;">
+            <img src="/static/img/album_art.png" style="max-width:200px; max-height:200px;" class="card-img-top mx-1" alt="..." align="center">
+            <div class="card-body">
+                <h5 class="card-title" align="center">...</h5>
+                <p class="card-text" align="center">...</p>
+            </div>
+        </div>
+    </div>
+{% endif %}

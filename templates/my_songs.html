@@ -1,0 +1,92 @@
+{% include "header.html" %}
+
+<!--Row 2-->
+{% include "creator_dashboard_dropdown_bar.html" %}
+
+<!--Row 3 - Column 1-->
+<div class="col-3">
+</div>
+
+<!--Row 3 - Column 2-->
+<div class="col mt-2">
+
+<!--            Now Playing-->
+    {% include "now_playing.html" %}
+
+    <div class="row">
+
+        <div class="row my-1" align="center">
+
+            <div class="col-12" align="center">
+                <div class="row">
+                    <h3 align="center">My Songs</h3>
+                </div>
+                <div class="row">
+                </div>
+            </div>
+
+            <div class="col">
+            </div>
+        </div>
+
+        <div class="row" align="left">
+            {% for song in songs %}
+                <div class="card mx-2 my-1" style="max-width:50rem; max-height:4rem;">
+                    <div class="row g-0">
+
+                        <div class="col-1" align="center">
+                            <form method="POST" action="">
+                                <input type="hidden" name="song_id" value="{{ song.song_id }}">
+                                <button class="fa-solid fa-circle-play my-4" type="submit" name="stream"></button>
+                            </form>
+                        </div>
+                        <div class="col-1">
+                            <img src="/{{ song.cover }}" class="img-fluid rounded-start my-2" alt="..." style="max-height:3rem; max-width:3rem;" align="center">
+                        </div>
+                        <div class="col-6">
+                            <div class="card-body" align="left">
+                                <a href="/view_song/{{ song.song_id }}">
+                                    <h5 class="card-title mb-0">{{ song.title }}</h5>
+                                </a>
+                                <a href="/view_creator/{{ song.user_id }}">
+                                    <p class="card-text mt-0 mb-0"><small class="text-body-secondary">{{ song.user.name }}</small></p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-4" align="right">
+                            <div class="row">
+                                <div class="col-1 mx-4" align="center">
+                                    <a class="btn my-2 mx-auto btn-light border" href="/view_lyrics/{{ song.song_id }}" role="button">Lyrics</a>
+                                </div>
+                                <div class="col-1 mx-4" align="center">
+                                    <a class="btn my-2 mx-auto btn-light border" href="/edit_song/{{ song.song_id }}" role="button">Edit</a>
+                                </div>
+                                <div class="col-1 mx-4" align="center">
+                                    <a class="btn my-2 mx-auto btn-light border" href="/delete_song/{{ song.song_id }}" role="button">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+
+        <div class="row">
+
+    <!--                Functionality for audio controls-->
+            {% include "audio_controls.html" %}
+
+        </div>
+    </div>
+</div>
+
+<!--Row 3 - Column 3-->
+<div class="col-3">
+
+</div>
+
+{% include "footer.html" %}

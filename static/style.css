@@ -1,0 +1,25 @@
+a {
+  color: #000000;
+  text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.song_list {
+  color: #3366cc; /* Your desired color */
+  /* Other styling properties */
+  text-decoration: none; /* Optional: Removes underline by default */
+}
+
+.song_list:hover {
+    background-color: rgb(230,230,230);
+}
+
+/* Font import */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+/* Apply font to an element */
+.retro-font {
+    font-family: 'VT323', monospace;
+}

@@ -1,0 +1,56 @@
+{% include "header.html" %}
+
+<!--Row 2 - Column 1-->
+<div class="col-3">
+    
+</div>
+
+<!--Row 2 - Column 2-->
+<div class="col-6 border">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <a href="/view_song/{{ song.song_id }}">
+                    <h3>{{ song.title }}</h3>
+                </a>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h4>
+                        <a href="/album/{{ song.albums.album_id }}">
+                            {{ song.singer }}
+                        </a>
+                        | {{ song.release_date }}
+                    </h4>
+
+                </div>
+            </div>
+        </div>
+        <div class="col">
+<!--            <a href="like_song/{{ song.id }}/1"><i class="fa-regular fa-star"></i></a>-->
+<!--            <a href="like_song/{{ song.id }}/2"><i class="fa-regular fa-star"></i></a>-->
+<!--            <a href="like_song/{{ song.id }}/3"><i class="fa-regular fa-star"></i></a>-->
+<!--            <a href="like_song/{{ song.id }}/4"><i class="fa-regular fa-star"></i></a>-->
+<!--            <a href="like_song/{{ song.id }}/5"><i class="fa-regular fa-star"></i></a>-->
+        </div>
+    </div>
+    <div class="row mx-2 border border-dark rounded">
+        <div class="overflow-y-auto">
+            {% for line in song.lyrics.split('\n') %}
+                <p>{{ line }}</p>
+            {% endfor%}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+<!--            <a href="#"><h5>Like</h5></a> -->
+<!--            | <a href="#"><h5>Comment</h5></a>-->
+        </div>
+    </div>
+</div>
+
+<!--Row 2 - Column 3-->
+<div class="col-3">
+</div>
+
+{% include "footer.html" %}

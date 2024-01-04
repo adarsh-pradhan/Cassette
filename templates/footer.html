@@ -1,0 +1,30 @@
+</div>
+</div>
+<div class="position-fixed fixed-bottom w-100" align="center">
+    <div class="mx-2" style="width:30%;">
+
+        <!-- {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class=flashes>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %} -->
+      
+        {% with msg = get_flashed_messages() %}
+        {% if msg %}
+        {% for message in msg %}
+        <div class="alert alert-dark alert-dismissible fade show" role="alert">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <strong>{{ message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+</body>
+</html>

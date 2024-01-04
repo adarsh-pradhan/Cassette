@@ -1,0 +1,101 @@
+{% include "header.html" %}
+
+<div class="col ">
+    <div class="row border-bottom">
+        <div class="col-3" align="center">
+            <h2>All Users</h2>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3" align="center">
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+        </div>
+
+        <div class="col-9">
+            <div class="row border-bottom border-dark">
+                <div class="col-1">
+                    <h4>
+                        user_id
+                    </h4>
+                </div>
+                <div class="col-1">
+                    <h4>
+                        Role
+                    </h4>
+                </div>
+                <div class="col-2">
+                    <h4>
+                        Username
+                    </h4>
+                </div>
+                <div class="col-3">
+                    <h4>
+                        Email
+                    </h4>
+                </div>
+                <div class="col-2">
+                    <h4>
+                        Date Created
+                    </h4>
+                </div>
+                <div class="col-1">
+                    <h4>
+                        Delete
+                    </h4>
+                </div>
+                <div class="col-1">
+                    <h4>
+                        Blacklist
+                    </h4>
+                </div>
+            </div>
+
+            {% for user in users %}
+                <div class="row border-top">
+                    <div class="col-1" align="right">
+                        {{ user.user_id }}
+                    </div>
+                    <div class="col-1" align="center">
+                        {{ user.role }}
+                    </div>
+
+                    {% if user.role == 0 %}
+                        <div class="col-2" align="left">
+                            <i class="fa-solid fa-user-shield"></i> {{ user.name }}
+                        </div>
+                    {% elif user.role == 1 %}
+                        <div class="col-2" align="left">
+                            <i class="fa-solid fa-headphones"></i> {{ user.name }}
+                        </div>
+                    {% else %}
+                        <div class="col-2" align="left">
+                            <i class="fa-solid fa-guitar"></i> {{ user.name }}
+                        </div>
+                    {% endif %}
+                    <div class="col-3" align="left">
+                        {{ user.email }}
+                    </div>
+                    <div class="col-2" align="left">
+                        {{ user.created_at }}
+                    </div>
+                    <div class="col-1" align="center">
+                        <a href="/admin_dashboard/all_users/delete_user/{{ user.user_id }}"><i class="fa-solid fa-user-xmark"></i></a>
+                    </div>
+                    <div class="col-1" align="center">
+                        {% if user.blacklist %}
+                            <a href="/admin_dashboard/all_users/blacklist_user/{{ user.user_id }}"><i class="fa-solid fa-user-slash"></i></a>
+                        {% else %}
+                            <a href="/admin_dashboard/all_users/blacklist_user/{{ user.user_id }}"><i class="fa-solid fa-user"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="col">
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}

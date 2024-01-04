@@ -1,0 +1,61 @@
+{% if song_to_stream %}
+    {% if not song_to_stream.flagged %}
+        <div class="row-auto">
+            <audio controls class="d-none" id="audioElement" src="/{{ song_to_stream.file_path }}" autoplay>
+            </audio>
+        </div>
+        <div class="position-fixed fixed-bottom" align="right" style="left:7%;">
+            <div class="container">
+                <img src="\static\img\cassette_with_controls.png" alt="Controls" usemap="#controls" width="330" height="250">
+                <span style="position: absolute; top:30%; left:81%; transform: translate(-50%, -50%); color:black; font-size:20px; font-weight:bold; font-family:'Bradley Hand', cursive;">
+                    {{ song_to_stream.singer }}
+                </span>
+                <span style="position: absolute; top:36%; left:81%; transform: translate(-50%, -50%); color:black; font-size:15px; font-family:'Bradley Hand', cursive;">
+                    {{ song_to_stream.title}}
+                </span>
+                <span class="retro-font" style="position: absolute; top:65%; left:88%; transform:translate(-50%, -50%); color:black; font-size: 30px;">
+                    {{ song_to_stream_duration}}
+                </span>
+            </div>
+            <map name="controls">
+                <area shape="rect" coords="29,14,72,40" alt="record" onclick="recordSong();" href="#">
+                <area shape="rect" coords="74,14,117,40" alt="prev" onclick="prevSong();" href="#">
+                <area shape="rect" coords="119,14,162,40" alt="stop" onclick="stopSong();" href="#">
+                <area shape="rect" coords="164,14,207,40" alt="pause" onclick="pauseAudio();" href="#">
+                <area shape="rect" coords="209,14,252,40" alt="play" onclick="playAudio();" href="#">
+                <area shape="rect" coords="254,14,297,40" alt="next" onclick="nextSong();" href="#">
+            </map>
+        </div>
+        <div class="position-fixed fixed-bottom" style="margin-left:66%; padding-bottom:1%;">
+            <img src="/static/img/volume_controls.png">
+        </div>
+    {% endif %}
+{% else %}
+    <div class="row-auto">
+    </div>
+    <div class="position-fixed fixed-bottom" align="right" style="left:7%;">
+        <div class="container">
+            <img src="\static\img\cassette_with_controls_open.png" alt="Controls" usemap="#controls" width="330" height="250">
+            <span style="position: absolute; top:30%; left:81%; transform: translate(-50%, -50%); color:black; font-size:20px; font-weight:bold; font-family:'Bradley Hand', cursive;">
+                
+            </span>
+            <span style="position: absolute; top:36%; left:81%; transform: translate(-50%, -50%); color:black; font-size:15px; font-family:'Bradley Hand', cursive;">
+                
+            </span>
+            <span class="retro-font" style="position: absolute; top:65%; left:88%; transform:translate(-50%, -50%); color:black; font-size: 30px;">
+                
+            </span>
+        </div>
+        <map name="controls">
+            <area shape="rect" coords="29,14,72,40" alt="record" onclick="recordSong();" href="#">
+            <area shape="rect" coords="74,14,117,40" alt="prev" onclick="prevSong();" href="#">
+            <area shape="rect" coords="119,14,162,40" alt="stop" onclick="stopSong();" href="#">
+            <area shape="rect" coords="164,14,207,40" alt="pause" onclick="pauseAudio();" href="#">
+            <area shape="rect" coords="209,14,252,40" alt="play" onclick="playAudio();" href="#">
+            <area shape="rect" coords="254,14,297,40" alt="next" onclick="nextSong();" href="#">
+        </map>
+    </div>
+    <div class="position-fixed fixed-bottom" style="margin-left:66%; padding-bottom:1%;">
+        <!-- <img src="/static/img/volume_controls.png"> -->
+    </div>
+{% endif %}

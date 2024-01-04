@@ -1,0 +1,152 @@
+{% include "header.html" %}
+
+<!--        Row 2 - Column 1-->
+<div class="col-3">
+
+<!--            Now Playing-->
+    {% include "now_playing.html" %}
+</div>
+
+<!--Row 2 - Column 2 -->
+<div class="col-6 ms-4">
+    <div class="row border border-dark rounded">
+
+        <div class="row my-1" align="center">
+            <div class="col-12" align="center">
+                <div class="row">
+                    <h3 align="center">Album : {{ album.title }} ({{ album.release_date }})</h3>
+                </div>
+                <div class="row ms-1 border-bottom border-dark">
+                    <div class="row">
+                        <h4>Creator:
+                            <a href="/profile/{{ album.user_id }}">
+                                {{ album.user.name }}
+                            </a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" align="left">
+
+            <div class="col">
+                <div class="row">
+                    <img src="/{{ album.cover }}" class="img-fluid rounded-start mx-2 my-3" alt="..." style="max-height:20rem; max-width:20rem;" align="center">
+                </div>
+                <div class="row mx-5 my-1">
+                    {{ album.description }}
+                </div>
+            </div>
+
+            <div class="col">
+
+                <div class="row mb-1 border-bottom">
+                    <div class="col" align="center">
+                        <a href="#" class="btn btn-dark border" style="width:9rem"><i class="fa-solid fa-circle-play"></i> Play all</a>
+                    </div>
+
+                    {% if current_user_level == 2 %}
+                        <div class="col">
+                            <a href="/add_to_album/{{ album.album_id }}" class="btn btn-dark border" style="width:9rem"><i class="fa-solid fa-square-plus"></i> Add song</a>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="row border-left">
+
+<!--                    List of songs in the current album-->
+                    <div class="border-bottom">
+                        {% if album.flagged %}
+                            <h3>This album has been Flagged by the Admin.</h3>
+                        {% elif album_songs %}
+                            <!-- List of all songs, without search -->
+                            {% for song in album_songs %}
+                                <div class="card mx-auto my-1 song_list" style="max-width:50rem; max-height:4rem;">
+                                    <div class="row g-0">
+                                        <div class="col-1 ms-1 me-2" align="center">
+                                            <form method="POST">
+                                                <input type="hidden" name="song_id" value="{{ song.song_id }}">
+                                                <button class="fa-solid fa-circle-play my-4" type="submit" name="stream"></button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <a href="/view_song/{{ song.song_id }}">
+                                                <img src="/{{ song.cover }}" class="img-fluid rounded-start my-2" alt="..." style="max-height:3rem; max-width:3rem;" align="center">
+                                            </a>
+                                        </div>
+                                        <div class="col-5 mx-2 g-0">
+                                            <div class="card-body" align="left">
+                                                <a href="/view_song/{{ song.song_id }}">
+                                                    <h5 class="card-title mb-0">{{ song.title }}</h5>
+                                                </a>
+                                                <a href="/view_creator/{{ song.user_id }}">
+                                                    <p class="card-text mt-0 mb-0"><small class="text-body-secondary">{{ song.singer }}</small></p>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" align="right">
+                                            <div class="row mt-1 mx-1" style="width:6rem; height:2rem;">
+                                                <a href="/add_to_queue/{{ song.song_id }}"><i class="fa-solid fa-circle-plus"></i> Queue</a>
+                                            </div>
+                                            <div class="row mx-1" style="width:6rem; height:2rem;">
+                                                <a href="/add_to_playlist/{{ song.song_id }}"><i class="fa-solid fa-circle-plus"></i> Playlist</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            No songs have been added in to this album :(
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+<!--                Functionality for audio controls-->
+        {% if song_to_stream %}
+            <div class="row-auto">
+                <audio controls class="d-none" id="audioElement" src="/{{ song_to_stream.file_path }}" autoplay>
+                </audio>
+            </div>
+            <div class="position-fixed fixed-bottom" align="center">
+                <div class="container">
+                    <img src="\static\img\cassette_with_controls.png" alt="Controls" usemap="#controls" width="330" height="250">
+                    <span style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); color: black; font-size: 20px; font-weight: bold; font-family: 'Bradley Hand', cursive;">
+                        {{ song_to_stream.singer }}
+                    </span>
+                    <span style="position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); color: black; font-size: 16px; font-family: 'Bradley Hand', cursive;">
+                        {{ song_to_stream.title}}
+                    </span>
+                    <span class="retro-font" style="position: absolute; top: 62%; left: 57%; transform: translate(-50%, -50%); color: black; font-size: 30px;">
+                        {{ song_to_stream_duration}}
+                    </span>
+                </div>
+                <map name="controls">
+                    <area shape="rect" coords="29,14,72,40" alt="record" onclick="recordSong();" href="#">
+                    <area shape="rect" coords="74,14,117,40" alt="prev" onclick="prevSong();" href="#">
+                    <area shape="rect" coords="119,14,162,40" alt="stop" onclick="stopSong();" href="#">
+                    <area shape="rect" coords="164,14,207,40" alt="pause" onclick="pauseAudio();" href="#">
+                    <area shape="rect" coords="209,14,252,40" alt="play" onclick="playAudio();" href="#">
+                    <area shape="rect" coords="254,14,297,40" alt="next" onclick="nextSong();" href="#">
+                </map>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+
+<!--              Column 3-->
+<div class="col-2 ms-4">
+
+</div>
+
+{% include "footer.html" %}

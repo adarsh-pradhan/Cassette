@@ -1,0 +1,44 @@
+{% include "header.html" %}
+
+<div class="col">
+</div>
+
+<div class="col-md-3 mt-4 border border-secondary rounded">
+    <div class="row">
+        <h2 class="text-center mt-3 mb-2">User Registration</h2>
+        <form method="POST">
+          <div class="form-floating my-2">
+            <input type="text" class="form-control" id="FullName" name="name" placeholder="Edward Kenway">
+            <label for="FullName">Full Name</label>
+          </div>
+          <div class="form-floating mb-2">
+            <input type="email" class="form-control" id="Email" name="email" placeholder="name@example.com">
+            <label for="Email">Email address</label>
+          </div>
+          <div class="form-floating mb-2">
+            <input type="password" class="form-control" id="Password" name="password" placeholder="Password">
+            <label for="Password">Password</label>
+          </div>
+          <div class="row">
+              <button type="submit" class="btn btn-dark mb-1 mx-auto" style="width:200px">Register</button>
+          </div>
+        </form>
+    </div>
+    <div class="row border-top" align="center">
+        <div class="col mt-2 ">
+            <a class="btn btn-light mb-3 border" href="/login" style="width:8rem;">Login instead?</a>
+        </div>
+    </div>
+
+    <div class="row">
+<!--        Cassette image-->
+        <div class="position-fixed fixed-bottom w-100" align="center">
+          <img src="\static\img\cassette.png" alt="Controls" usemap="#controls" width="330" height="207">
+        </div>
+    </div>
+
+</div>
+
+<div class="col">
+</div>
+{% include "footer.html" %}

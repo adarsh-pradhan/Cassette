@@ -1,0 +1,43 @@
+{% include "header.html" %}
+
+<!--        Row 2 - Column 1-->
+<div class="col-3">
+
+    {% include "queue_component.html" %}
+
+<!--            Now Playing-->
+
+    {% include "now_playing.html" %}
+
+</div>
+
+<!--        Row 2 - Column 2 -->
+<div class="col-6">
+
+    {% if filtered_songs_bool %}
+        <a href="/user_dashboard"><h4><i class="fa-solid fa-circle-left"></i> Back to the Recommended songs</h4></a>
+    {% endif %}
+
+    <div class="row">
+        <div class="row" align="center">
+
+            {% include "search_functionality_input.html" %}
+
+            {% include "search_functionality_results.html" %}
+
+        </div>
+    </div>
+
+    <div class="row">
+
+<!--                Functionality for audio controls-->
+    {% include "audio_controls.html" %}
+
+    </div>
+</div>
+
+<!--              Column 3-->
+
+{% include "playlists_column.html" %}
+
+{% include "footer.html" %}

@@ -1,0 +1,114 @@
+{% include "header.html" %}
+
+<!--Row 2-->
+{% include "creator_dashboard_dropdown_bar.html" %}
+
+<!--Row 3 - Column 1-->
+<div class="col-3">
+</div>
+
+<!--Row 3 - Column 2-->
+<div class="col-6 mt-2">
+
+<!--            Now Playing-->
+    {% if song_to_stream %}
+        <div class="row-2 position-fixed fixed-bottom mx-4 my-4" align="left">
+            <div class="card border border-dark rounded" style="width: 13rem;">
+                <h5 align="center">Now Playing</h5>
+
+                {% if song_to_stream.cover %}
+                    <img src="{{ song_to_stream.cover }}" style="max-width:200px; max-height:200px;" class="card-img-top mx-1" alt="..." align="center">
+                {% else %}
+                    <img src="/static/img/album_art.png" style="max-width:200px; max-height:200px;" class="card-img-top mx-1" alt="..." align="center">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title" align="center">{{ song_to_stream.title }}</h5>
+                    <p class="card-text" align="center">{{ song_to_stream.singer }}</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row border border-dark rounded">
+
+        <div class="row my-1" align="center">
+
+            <div class="col-12" align="center">
+                <div class="row">
+                    <div class="col" align="center">
+                        <h3>My Albums</h3>
+                    </div>
+                </div>
+                <div class="row">
+                </div>
+            </div>
+
+            <div class="col">
+            </div>
+        </div>
+
+        <div class="row" align="left">
+
+            {% if album_count_bool %}
+
+            <div class="row">
+
+                {% for album in albums %}
+                    <div class="card mx-auto ms-2 my-1 song_list" style="max-width:50rem; max-height:4rem;" align="center">
+                        <div class="row g-0">
+
+                            <div class="col" align="center">
+                            </div>
+
+                            <div class="col-md-1">
+                                <img src="/{{ album.cover }}" class="img-fluid rounded-start my-2" alt="..." style="max-height:3rem; max-width:3rem;" align="center">
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card-body" align="left">
+                                    <a href="/album/{{ album.album_id }}">
+                                        <h5 class="card-title mb-0">{{ album.title }}</h5>
+                                    </a>
+                                    <a href="/view_creator/{{ album.user_id }}">
+                                        <p class="card-text mt-0 mb-0"><small class="text-body-secondary">{{ album.singer }}</small></p>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" align="right">
+                                <div class="row" align="center">
+                                    <div class="col-8 mt-3 ">
+                                        Year Released: {{ album.release_date }}
+                                    </div>
+                                    <div class="col-4" align="center">
+                                    <a class="btn my-2 mx-auto btn-light border" href="/delete_album/{{ album.album_id }}" role="button">Delete</a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+                <div class="row my-2">
+                    <div class="col" align="center">
+                        Nothing to show here:(
+                    </div>
+                    <div class="col">
+                        <a class="dropdown-item" href="/create_album"><i class="fa-solid fa-compact-disc"></i> Create a new album</a>
+                    </div>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!--Row 3 - Column 3-->
+<div class="col-3">
+</div>
+
+{% include "footer.html" %}
