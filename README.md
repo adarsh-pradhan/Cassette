@@ -15,6 +15,8 @@
 ### Start the application
 - `python main.py`
 
+### Go to http://127.0.0.1:5000
+
 Or, just open the root foder in any IDE, 
 it will automatically create a virtual environment 
 and install all the requirements from the requirements.txt file.
