@@ -132,12 +132,13 @@
                 </div>
             </div>
             <div class="col mx-2 my-2">
-                {% if current_user.dark_mode == True %}
-                    <a href="/toggle_dark_mode"><i class="fa-solid fa-moon"></i></a>
-                {% else %}
-                    <a href="/toggle_dark_mode"><i class="fa-solid fa-sun"></i></a>
+                {% if current_user.isauthenticated == True %}
+                    {% if current_user.dark_mode == True %}
+                        <a href="/toggle_dark_mode"><i class="fa-solid fa-moon"></i></a>
+                    {% else %}
+                        <a href="/toggle_dark_mode"><i class="fa-solid fa-sun"></i></a>
+                    {% endif %}
                 {% endif %}
-                
             </div>
         </div>
     </div>

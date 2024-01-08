@@ -1681,14 +1681,15 @@ def logout():
 
 
 # -------------------------------------Toggle Dark/Light Mode
-@app.route('/toggle_dark_mode/<str:current_route>')
+# @app.route('/toggle_dark_mode/<str:current_route>', methods=['GET', 'POST'])
+@app.route('/toggle_dark_mode', methods=['GET', 'POST'])
 def toggle_dark_mode():
     if current_user.dark_mode == False:
         current_user.dark_mode = True
         # Write the logic for SQLAlchemy to change the detail for dark_mode
     else:
         current_user.dark_mode = False
-    return 
+    return redirect(url_for(user_dashboard))
 
 
 # -------------------------------------Route to test if the trigger mechanism is working
@@ -1722,7 +1723,8 @@ def page_not_found(e):
 
 if __name__ == "__main__":
 
-    app.run(debug=True)
+    # app.run(debug=True)
 
     # To allow access for other users in local network
     # app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
