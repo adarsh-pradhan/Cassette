@@ -1,6 +1,7 @@
 Flask==3.0.0
 Flask-Login==0.6.3
 Flask-RESTful==0.3.10
+Flask-Migrate==4.0.5
 matplotlib==3.8.2
 mutagen==1.47.0
 SQLAlchemy==2.0.23
